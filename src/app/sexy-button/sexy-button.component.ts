@@ -45,6 +45,7 @@ export class SexyButtonComponent implements OnInit {
         let intervalID:any = setInterval(function () {
             that.textSpan.nativeElement.innerText=text.slice(0,x)+markers[x%2];
             if (++x === y+1) {
+                that.textSpan.nativeElement.innerText = text.slice(0, x)
                 window.clearInterval(intervalID);
             }
         }, 300);
