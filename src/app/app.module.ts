@@ -2,10 +2,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { SexyButtonComponent } from './sexy-button/sexy-button.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SexyButtonComponent
   ],
   imports: [
     BrowserModule
