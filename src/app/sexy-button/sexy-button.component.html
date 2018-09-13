@@ -1,8 +1,9 @@
 <div class="sexy-button-container">
-    <div (mouseout)="stopAnimation()" (mouseenter)="initiateAnimation($event)" class="sexy-button" [ngClass]="{'tilted-left':tilted
+    <div (click)="throwClick()" (mouseout)="stopAnimation()" (mouseenter)="initiateAnimation($event)" class="sexy-button" [ngClass]="{'tilted-left':tilted
         < 0, 'tilted-right':tilted> 0}">
-        <span class="button-text">Click Me</span>
+        <span #AwesomeTextSpan class="button-text">Click Me</span>
     </div>
+    <div class="sexy-button sexy-button-bg power-up-bg"></div>
     <div class="sexy-button sexy-button-bg sexy-button-mid"></div>
     <div class="sexy-button sexy-button-bg" [ngClass]="{'tilted-left':tilted
     <0 , 'tilted-right':tilted> 0}"></div>
