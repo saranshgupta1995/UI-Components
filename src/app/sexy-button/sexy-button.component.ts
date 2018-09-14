@@ -17,6 +17,15 @@ export class SexyButtonComponent implements OnInit {
     animatePowerBar(width, td) {
         document.getElementsByClassName('power-up-bg')[0]['style'].transitionDuration = td;
         document.getElementsByClassName('power-up-bg')[0]['style'].width = width;
+        let that=this;
+        if(width==='100%'){
+            that.powerTimer=setTimeout(()=>{
+                that.crazyShow('Loading');
+            },2000)
+        }else{
+            clearTimeout(that.powerTimer);
+            that.powerTimer=null;
+        }
     }
 
     initiateAnimation(event) {
@@ -29,10 +38,6 @@ export class SexyButtonComponent implements OnInit {
                 that.animatePowerBar('100%', '2s');
             } else if(that.tilted) {
                 that.animatePowerBar('0', '0.1s');
-                if (that.powerTimer) {
-                    clearInterval(that.powerTimer);
-                    that.powerTimer=null;
-                }
             }
         }
     }
@@ -52,17 +57,14 @@ export class SexyButtonComponent implements OnInit {
     }
 
     throwClick(){
-        this.crazyShow('Loading')
+        // this.crazyShow('Loading')
         // let targetElem = document.getElementsByClassName('sexy-button')[0];
         // targetElem['style']['top'] = (-this.poweredUp).toString()+'px';
     }
 
     stopAnimation() {
         this.tilted = 0;
-        clearInterval(this.powerTimer);
-        this.powerTimer = null;
         this.animatePowerBar('0', '0.1s');
-
     }
 
     ngOnInit() {
