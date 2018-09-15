@@ -5,17 +5,18 @@ import { Directive, ElementRef, ViewContainerRef, TemplateRef, Input } from '@an
 })
 export class TextBreakerDirective {
 
-    @Input('letterClass') letterClass;
+    @Input('letterClass') letterClass='';
 
     constructor(private el: ElementRef) { 
     }
     
     ngAfterViewInit(){
         let innerText=this.el.nativeElement.innerText.split('');
-        console.log(innerText);
         this.el.nativeElement.innerHTML='';
+        let count=0;
         innerText.forEach(element => {
-            this.el.nativeElement.innerHTML+=`<span class='${this.letterClass}'>${element}</span>`;
+            this.el.nativeElement.innerHTML+=`<span iter='${count}s' class='${this.letterClass}'>${element}</span>`;
+            ++count;
         });
     }
 
