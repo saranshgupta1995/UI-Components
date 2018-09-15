@@ -1,17 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
 
+ @import url(https://fonts.googleapis.com/css?family=Righteous);
+
 /* .broken-text-container:hover>span.rotator{
     transform: rotateY(360deg);
     display: inline-block;
     transition-duration: 200ms;
 } */
 
+span.rotator:nth-child(n){
+    background-color: rgb(76, 93, 178);
+}
+
+/* span.rotator:nth-child(2n+1){
+    background-color: rgb(219, 63, 35)
+} */
 
 span.rotator.active{
     display: inline-block;
     animation-delay: attr(iter);
     animation: balance 1.5s ease-in-out;
-    background-color: rgb(75, 75, 190)
 }
 
 @keyframes balance {

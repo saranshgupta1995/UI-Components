@@ -14,15 +14,14 @@ export class BrokenTextComponent implements OnInit {
 
     initiateChildren(elem) {
         for (let i = 0; i < elem.children.length; i++) {
-            let child=elem.children[i]
+            let child = elem.children[i]
             child.addEventListener('mouseenter', (e) => {
                 child.classList.add('active');
             });
             child.addEventListener('animationend', (e) => {
                 e.target.classList.remove('active');
             });
-        });
+        }
     }
 }
 
-}

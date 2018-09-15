@@ -1,6 +1,8 @@
 span{
-    font-size: 58px;
+    font-size: 4em;
     font-weight: 700;
     text-transform: uppercase;
     cursor: pointer;
+    color: white;
+        font-family: 'Righteous', serif;
 }
