@@ -5,17 +5,21 @@ import { Directive, ElementRef, ViewContainerRef, TemplateRef, Input } from '@an
 })
 export class TextBreakerDirective {
 
-    @Input('letterClass') letterClass='';
+    @Input('letterClass') letterClass = '';
+    @Input('splitter') splitter = '';
+    @Input('targetList') targetList = [];
 
-    constructor(private el: ElementRef) { 
+    constructor(private el: ElementRef) {
     }
-    
-    ngAfterViewInit(){
-        let innerText=this.el.nativeElement.innerText.split('');
-        this.el.nativeElement.innerHTML='';
-        let count=0;
+
+    ngAfterViewInit() {
+        let innerText = this.el.nativeElement.innerText.split(this.splitter);
+        this.el.nativeElement.innerHTML = '';
+        let count = 0;
+        let classPart = '';
         innerText.forEach(element => {
-            this.el.nativeElement.innerHTML+=`<span iter='${count}s' class='${this.letterClass}'>${element}</span>`;
+            classPart = !this.targetList.length ? `class='${this.letterClass}'` : ``;
+            this.el.nativeElement.innerHTML += (`<span iter='${count}s'` + classPart + `>${element}</span>`);
             ++count;
         });
     }

@@ -6,6 +6,7 @@ import { SexyButtonComponent } from './sexy-button/sexy-button.component';
 import { BigFatTextComponent } from './big-fat-text/big-fat-text.component';
 import { TextBreakerDirective } from './directives/text-breaker.directive';
 import { BrokenTextComponent } from './broken-text/broken-text.component';
+import { CrazyBgComponent } from './crazy-bg/crazy-bg.component';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { BrokenTextComponent } from './broken-text/broken-text.component';
     SexyButtonComponent,
     BigFatTextComponent,
     TextBreakerDirective,
-    BrokenTextComponent
+    BrokenTextComponent,
+    CrazyBgComponent
   ],
   imports: [
     BrowserModule
