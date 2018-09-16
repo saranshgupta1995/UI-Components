@@ -11,6 +11,7 @@ export class CrazyBgComponent implements OnInit {
 
 
     ngOnInit() {
+        let randFun=Math.random;
         let currentMousePosition = {
             x: -1,
             y: -1
@@ -38,10 +39,9 @@ export class CrazyBgComponent implements OnInit {
             y: 0
         };
 
-        var particleCount = 140,
+        var particleCount = Math.min(W,H),
             particles = [],
-            minDist: any = 70,
-            dist;
+            minDist: any = 70
 
         function paintCanvas() {
             ctx.fillStyle = "rgba(0,0,0,1)";
@@ -63,23 +63,21 @@ export class CrazyBgComponent implements OnInit {
         }, false);
 
         class Particle {
-            x: number = Math.random() * W;
-            y: number = Math.random() * H;
-            vx: number = 0.04;
+            x: number = randFun() * W;
+            y: number = randFun() * H;
             lifeTime=0;
-            vy: number = 0.04;
             radius: number = 1;
 
             constructor(){
                 let that=this;
                 setInterval(()=>{
-                    that.x= Math.random()*W;
-                    that.y= Math.random()*H;
-                }, 5000 + Math.random() * 50000)
+                    that.x = randFun()*W;
+                    that.y = randFun()*H;
+                }, 5000 + randFun() * 50000)
             }
 
             draw: () => void = function () {
-                ctx.fillStyle = "rgba(255, 255, 200, " + (0.3+Math.min(Math.random(),0.7)).toString() + ")";
+                ctx.fillStyle = "rgba(255, 255, 200, " + (0.3 + Math.min(randFun(),0.7)).toString() + ")";
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
@@ -91,11 +89,16 @@ export class CrazyBgComponent implements OnInit {
                 return
                 let diffX = this.x - currentMousePosition.x
                 let diffY = this.y - currentMousePosition.y
-                this.x -=  diffX>= 40 ? ((this.x - currentMousePosition.x) / 1000) : 0 + Math.random() * 1 + Math.random() * -1;
-                this.y -= diffY >= 40 ? ((this.y - currentMousePosition.y) / 1000) : 0 + Math.random() * 1 + Math.random() * -1;
-                if (diffX*diffX+diffY*diffY<2500) {
-                    this.x = Math.random() * W;
-                    this.y = Math.random() * H;
+                if(diffX*diffX+diffY*diffY<6600){
+                    this.x -= diffX/20;
+                    this.y -= diffY/20;
+                }else{
+                    this.x -= diffX * diffX >= 1600 ? ((this.x - currentMousePosition.x) / 1000) : 0 + randFun() * 1 + Math.random() * -1;
+                    this.y -= diffY * diffY >= 1600 ? ((this.y - currentMousePosition.y) / 1000) : 0 + randFun() * 1 + Math.random() * -1;
+                }
+                if (diffX*diffX+diffY*diffY<81) {
+                    this.x = randFun() * W;
+                    this.y = randFun() * H;
                 }
             };
 
@@ -106,13 +109,6 @@ export class CrazyBgComponent implements OnInit {
             particles.push(new Particle());
         }
         
-        // setInterval(()=>{
-        //     for (var i = 0; i < particleCount; i++) {
-        //         particles[i].x = Math.random() * W;
-        //         particles[i].y = Math.random() * H;
-        //     }
-        // },1000)
-
         function draw() {
 
             paintCanvas();
@@ -130,9 +126,6 @@ export class CrazyBgComponent implements OnInit {
 
             for (var i = 0; i < particles.length; i++) {
                 p = particles[i];
-
-                p.x += p.vx;
-                p.y += p.vy
 
                 if (p.x + p.radius > W)
                     p.x = p.radius;
@@ -172,15 +165,6 @@ export class CrazyBgComponent implements OnInit {
                 ctx.moveTo(p.x, p.y);
                 ctx.lineTo(p2.x, p2.y);
                 ctx.stroke();
-
-                // var ax = 0,
-                //     ay = 0;
-
-                // p1.vx -= ax;
-                // p1.vy -= ay;
-
-                // p2.vx += ax;
-                // p2.vy += ay;
             }
         }
 
