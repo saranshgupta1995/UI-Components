@@ -73,7 +73,7 @@ export class CrazyBgComponent implements OnInit {
                 setInterval(()=>{
                     that.x = randFun()*W;
                     that.y = randFun()*H;
-                }, 5000 + randFun() * 50000)
+                }, 5000 + randFun() * 100000)
             }
 
             draw: () => void = function () {
@@ -89,16 +89,16 @@ export class CrazyBgComponent implements OnInit {
                 return
                 let diffX = this.x - currentMousePosition.x
                 let diffY = this.y - currentMousePosition.y
-                if(diffX*diffX+diffY*diffY<6600){
+
+                if (diffX * diffX + diffY * diffY < 81) {
+                    this.x = randFun() * W;
+                    this.y = randFun() * H;
+                }else if(diffX*diffX+diffY*diffY<6600){
                     this.x -= diffX/20;
                     this.y -= diffY/20;
                 }else{
-                    this.x -= diffX * diffX >= 1600 ? ((this.x - currentMousePosition.x) / 1000) : 0 + randFun() * 1 + Math.random() * -1;
-                    this.y -= diffY * diffY >= 1600 ? ((this.y - currentMousePosition.y) / 1000) : 0 + randFun() * 1 + Math.random() * -1;
-                }
-                if (diffX*diffX+diffY*diffY<81) {
-                    this.x = randFun() * W;
-                    this.y = randFun() * H;
+                    this.x -= (diffX * diffX >= 1600 ? ((diffX) / 1000) : 0) + randFun() * 1 + randFun() * -1;
+                    this.y -= (diffY * diffY >= 1600 ? ((diffY) / 1000) : 0) + randFun() * 1 + randFun() * -1;
                 }
             };
 
@@ -142,9 +142,11 @@ export class CrazyBgComponent implements OnInit {
                 }
 
                 let p2;
+                let k=0;
                 for (var j = i + 1; j < particles.length; j++) {
-                    p2 = particles[j];
-                    distance(p, p2);
+                    k+=distance(p, particles[j])?1:0;
+                    if(k>5)
+                    break
                 }
                 p.updateSpeed();
 
@@ -166,6 +168,8 @@ export class CrazyBgComponent implements OnInit {
                 ctx.lineTo(p2.x, p2.y);
                 ctx.stroke();
             }
+
+            return dist<=minDist
         }
 
         function animloop() {
